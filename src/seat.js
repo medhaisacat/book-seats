@@ -8,7 +8,6 @@ function seats() {
 
 // return all seats
 seats.prototype.getAllSeats = function () {
-  console.log("huhuhu")
   var allSeats = {
     'available': [],
     'booked': [],
@@ -22,7 +21,6 @@ seats.prototype.getAllSeats = function () {
     if (number === SELECTED)
       allSeats.selected.push(index);
   })
-  console.log(allSeats)
   return allSeats;
 };
 
