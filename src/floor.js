@@ -1,30 +1,31 @@
-var seats = require("./seat.js");
+var seat = require("./seat.js");
 
 // Array of all floors
-var floors = [1, 2, 3, 4, 5];
+function floors () {
+  this.floors = new Map();
+  this.floors.set("1st floor", new seat.seats());
+  this.floors.set("2nd floor", new seat.seats());
+  this.floors.set("3rd floor", new seat.seats());
+  this.floors.set("4th floor", new seat.seats());
+  this.floors.set("5th floor", new seat.seats());
+}
 
-var getAllFloors;
-getAllFloors = function () {
-  return floors;
+floors.prototype.getAllFloors = function () {
+  return this.floors;
 };
 
-var getFloorSeats;
-getFloorSeats = function (floor) {
-  return seats.getAllSeats(floor);
+floors.prototype.getFloorSeats = async function (number) {
+   return await this.floors.get(number).getAllSeats();
 };
 
-var selectSeats;
-selectSeats = function (...selected) {
-  seats.setSelectedSeats(selected);
+floors.prototype.selectSeats = function (...selected) {
+  this.floors.get(number).setSelectedSeats(...selected);
 };
-var finishPayment;
-finishPayment = function (...paid) {
-  seats.finishPayment(...paid);
+
+floors.prototype.finishPayment = async function (...paid) {
+  await this.floors.get(number).finishPayment(...paid);
 };
 
 module.exports = {
-  getAllFloors,
-  getFloorSeats,
-  selectSeats,
-  finishPayment
+  floors
 };
